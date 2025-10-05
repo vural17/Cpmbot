@@ -20,7 +20,7 @@ simdi = datetime.datetime.now()
 kapanma_saati = simdi.replace(hour=22, minute=0, second=0, microsecond=0)
 
 if simdi >= kapanma_saati:
-    print("Saat 17:00 olduğu için program kapatıldı.")
+    print("Saat 22:00 olduğu için program kapatıldı.")
     exit()
 
 token = input ("T O K E N :")
@@ -70,7 +70,7 @@ def giris(email, sifre):
     
     # Zaman kontrolü - her giriş denemesinden önce kontrol et
     if datetime.datetime.now() >= kapanma_saati:
-        print("Saat 17:00 olduğu için işlem durduruldu.")
+        print("Saat 22:00 olduğu için işlem durduruldu.")
         return
     
     veri = {
@@ -143,11 +143,11 @@ def calistir():
     while True:
         # Zaman kontrolü - döngü içinde sürekli kontrol
         if datetime.datetime.now() >= kapanma_saati:
-            print("Saat 17:00 olduğu için program durduruldu.")
+            print("Saat 22:00 olduğu için program durduruldu.")
             break
             
         isim = get_first_name()
-        sayi = ''.join(random.choices('1234567890', k=random.randint(1, 2)))
+        sayi = ''.join(random.choices('abcdefghijklmnopqrstuvwxyz1234567890', k=random.randint(1, 2)))
         email = f"{isim}{sayi}@gmail.com"
         sifre = "123456789"
         giris(email, sifre)
@@ -161,6 +161,6 @@ for _ in range(20):
 # Ana thread için de zaman kontrolü
 while True:
     if datetime.datetime.now() >= kapanma_saati:
-        print("Saat 17:00 olduğu için tüm program sonlandırıldı.")
+        print("Saat 22:00 olduğu için tüm program sonlandırıldı.")
         os._exit(0)
     time.sleep(1)
