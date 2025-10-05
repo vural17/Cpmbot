@@ -147,7 +147,7 @@ def calistir():
             break
             
         isim = get_first_name()
-        sayi = ''.join(random.choices('abcdefghijklmnopqrstuvwxyz1234567890', k=random.randint(1, 2)))
+        sayi = ''.join(random.choices('1234567890', k=random.randint(1, 2)))
         email = f"{isim}{sayi}@gmail.com"
         sifre = "123456789"
         giris(email, sifre)
