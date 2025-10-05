@@ -17,7 +17,7 @@ except:
 
 # Zaman kontrolü
 simdi = datetime.datetime.now()
-kapanma_saati = simdi.replace(hour=17, minute=0, second=0, microsecond=0)
+kapanma_saati = simdi.replace(hour=22, minute=0, second=0, microsecond=0)
 
 if simdi >= kapanma_saati:
     print("Saat 17:00 olduğu için program kapatıldı.")
