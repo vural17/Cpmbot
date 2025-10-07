@@ -18,7 +18,7 @@ except:
 aktif = False  # Burayı True/False ile açıp kapatabilirsin
 
 if not aktif:
-    print(f"{kirmizi}Program devre dışı bırakıldı. Aktiflik: False.{beyaz}")
+    print(f"{red}Program devre dışı bırakıldı. Aktiflik: False.{beyaz}")
     exit()
 # Zaman kontrolü
 simdi = datetime.datetime.now()
