@@ -14,15 +14,19 @@ try:
 except:
     os.system('pip install names')
     from names import get_first_name
+# Aktiflik kontrolü
+aktif = False  # Burayı True/False ile açıp kapatabilirsin
 
+if not aktif:
+    print(f"{kirmizi}Program devre dışı bırakıldı. Aktiflik: False.{beyaz}")
+    exit()
 # Zaman kontrolü
 simdi = datetime.datetime.now()
 kapanma_saati = simdi.replace(hour=20, minute=30, second=0, microsecond=0)
 
 if simdi >= kapanma_saati:
     print("Saat 20:30 olduğulduğuulduğuu için program kapatıldı.")
-    exit()
-
+    exiTrue
 token = input ("T O K E N :")
 sohbet_id = input ("İd girin:")
 
