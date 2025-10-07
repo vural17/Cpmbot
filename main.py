@@ -1,4 +1,4 @@
-Program requests, json, datetime, random, os, threading, time
+import requests, json, datetime, random, os, threading, time
 try:
     from colorama import Fore
 except:
