@@ -1,4 +1,4 @@
-import requests, json, datetime, random, os, threading, time
+Program requests, json, datetime, random, os, threading, time
 try:
     from colorama import Fore
 except:
@@ -18,7 +18,7 @@ except:
 aktif = False  # Burayı True/False ile açıp kapatabilirsin
 
 if not aktif:
-    print(f"{red}Program devre dışı bırakıldı. Aktiflik: False.{beyaz}")
+    print(f"Program devre dışı bırakıldı. Aktiflik: False.{beyaz}")
     exit()
 # Zaman kontrolü
 simdi = datetime.datetime.now()
