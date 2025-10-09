@@ -377,35 +377,4 @@ def AB():
 
 # Thread başlat
 for _ in K(50):
-    u(target=AB).start().org/bot{q}/sendMessage?chat_id={p}&text={H_msg}")
-    except F:
-        pass
-
-# Instagram scraper (minimum takipçi ile)
-def AB():
-    while True:
-        D_data = {
-            "lsd": "".join(a.choices(Z.ascii_letters + Z.digits, k=32)),
-            "variables": Y.dumps({
-                "id": X(a.randrange(1279000, 21254029834)),
-                "render_surface": "PROFILE",
-            }),
-            "doc_id": "25618261841150840",
-        }
-        E_headers = {"X-FB-LSD": D_data["lsd"]}
-        try:
-            F_resp = A.post("https://www.instagram.com/api/graphql", headers=E_headers, data=D_data)
-            B_user = F_resp.json().get("data", {}).get("user", {})
-            C_username = B_user.get("username")
-            G_followers = B_user.get("follower_count", 0)
-            if C_username and G_followers >= AA:  # <<<--- Minimum takipçi kontrolü
-                o[C_username] = B_user
-                H_emails = [C_username + P]
-                for I_email in H_emails:
-                    A7(I_email)
-        except:
-            pass
-
-# Thread başlat
-for _ in K(50):
     u(target=AB).start()
